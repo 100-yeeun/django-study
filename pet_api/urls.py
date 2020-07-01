@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from pets.views import PetViewSet
+from pets import views
+from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter()
-router.register('pet',PetViewSet)
+router.register('pet',views.PetViewSet)
+
+update_patterns = [
+    path('age/<int:pet_id>/', csrf_exempt(views.UpdateAge))
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(router.urls)),
+    path('update/', include(update_patterns))
 ]
