@@ -7,5 +7,6 @@ class Pet(models.Model):
     species = models.IntegerField() # 개 = 1, 고양이 = 2, 기타 = 3
     age = models.CharField(max_length=10) #개월수, 나이
 
+ # 이름알려주는 함수라고 생각하기
     def __str__(self):
         return self.name
